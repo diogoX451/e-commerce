@@ -21,8 +21,8 @@ use App\Http\Controllers\Api\UserConroler;
 
 
 
-Route::post('/login', [UserConroler::class, 'login'])->name('login');
 
+Route::post('/login', [UserConroler::class, 'login'])->name('login');
 Route::post('/logout', [UserConroler::class, 'logout']);
 Route::group([
     'middleware' => 'apiLogin',
