@@ -13,6 +13,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
+        "rebing/graphql-laravel": "^8.6",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {

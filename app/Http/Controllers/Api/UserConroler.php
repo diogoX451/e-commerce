@@ -33,17 +33,20 @@ class UserConroler extends Controller
         return response()->json($users);
     }
 
-    public function store(Request $request)
+    public function register(Request $request)
     {
-        $user = new User();
-        $user->name = $request->name;
-        $user->last_name = $request->last_name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-        $user->password = bcrypt($request->password);
-        $user->token = $request->token;
-        $user->save();
-        return response()->json($user);
+        $request->validate([
+            'name' => 'required',
+            'last_name' => 'required',
+            'email' => 'required|email|unique:users',
+            'phone' => 'required',
+            'password' => 'required',
+        ]);
+
+        $user = User::create($request->all());
+
+        $token = $user->createToken('T')->acessToken();
+        return response()->json(['token' => $token], 200);
     }
 
     public function login(Request $request)
