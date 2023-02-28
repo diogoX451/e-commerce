@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Repository\Eloquent;
+namespace App\Repository\Implements\Login;
 
 use App\Repository\AcessUserRepositoryInterface;
 

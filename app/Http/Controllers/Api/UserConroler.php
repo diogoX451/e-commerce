@@ -6,15 +6,18 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repository\AcessUserRepositoryInterface;
+use App\Repository\UserRepositoryInterface;
 use Illuminate\Http\Request;
 
 class UserConroler extends Controller
 {
-    private  AcessUserRepositoryInterface $acessRepository;
+    private AcessUserRepositoryInterface $acessRepository;
+    private UserRepositoryInterface $userRepository;
 
-    public function __construct(AcessUserRepositoryInterface $acessRepository)
+    public function __construct(AcessUserRepositoryInterface $acessRepository, UserRepositoryInterface $userRepository)
     {
         $this->acessRepository = $acessRepository;
+        $this->userRepository = $userRepository;
     }
 
     protected function respondWithToken($token)
@@ -35,18 +38,7 @@ class UserConroler extends Controller
 
     public function register(Request $request)
     {
-        $request->validate([
-            'name' => 'required',
-            'last_name' => 'required',
-            'email' => 'required|email|unique:users',
-            'phone' => 'required',
-            'password' => 'required',
-        ]);
-
-        $user = User::create($request->all());
-
-        $token = $user->createToken('T')->acessToken();
-        return response()->json(['token' => $token], 200);
+        return $this->userRepository->create($request);
     }
 
     public function login(Request $request)

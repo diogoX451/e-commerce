@@ -75,10 +75,10 @@ return [
     'schemas' => [
         'default' => [
             'query' => [
-                // ExampleQuery::class,
+                \App\GraphQL\Queries\User\UsersQuery::class,
             ],
             'mutation' => [
-                // ExampleMutation::class,
+                \App\GraphQL\Mutations\User\CreateUserMutation::class,
             ],
             // The types only available in this schema
             'types' => [
@@ -95,7 +95,7 @@ return [
             'execution_middleware' => null,
         ],
         'user' => [
-            'query' => [],
+            'query' => [\App\GraphQL\Queries\User\UsersQuery::class,],
             'mutation' => [],
             'types' => [
                 \App\GraphQL\Types\User\UserType::class,

@@ -2,37 +2,38 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Mutations\User;
+namespace App\GraphQL\Queries\User;
 
-
-use Closure;
-use GraphQL\Type\Definition\ResolveInfo;
-use GraphQL\Type\Definition\Type;
-use Rebing\GraphQL\Support\Facades\GraphQL;
-use Rebing\GraphQL\Support\Mutation;
 use App\Repository\UserRepositoryInterface;
+use Rebing\GraphQL\Support\Facades\GraphQL;
+use GraphQL\Type\Definition\Type;
+use Rebing\GraphQL\Support\Query;
 
-class CreateUserMutation extends Mutation
+
+class UsersQuery extends Query
 {
     private UserRepositoryInterface $userRepository;
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
     }
-
     protected $attributes = [
-        'name' => 'createUser',
-        'description' => 'A mutation'
+        'name' => 'users',
+        'description' => 'A query with '
     ];
 
     public function type(): Type
     {
-        return Type::nonNull(GraphQL::type('User'));
+        return Type::listOf(GraphQL::type('User'));
     }
 
     public function args(): array
     {
         return [
+            'id' => [
+                'name' => 'id',
+                'type' => Type::int(),
+            ],
             'name' => [
                 'name' => 'name',
                 'type' => Type::string(),
@@ -56,8 +57,8 @@ class CreateUserMutation extends Mutation
         ];
     }
 
-    public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
+    public function resolve($root, $args)
     {
-        return $this->userRepository->create($args);
+        return $this->userRepository->all();
     }
 }
