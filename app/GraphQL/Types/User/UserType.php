@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\GraphQL\Types\User;
 
 use GraphQL\Type\Definition\Type;
+use \App\Models\User;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class UserType extends GraphQLType
@@ -12,6 +13,8 @@ class UserType extends GraphQLType
     protected $attributes = [
         'name' => 'User',
         'description' => 'A type for user',
+        'model' => User::class,
+
     ];
 
     public function fields(): array

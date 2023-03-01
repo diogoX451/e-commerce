@@ -3,17 +3,17 @@
 namespace App\Repository\Implements\Login;
 
 use App\Repository\AcessUserRepositoryInterface;
+use Exception;
 
 class AcessRepository implements AcessUserRepositoryInterface
 {
     public function login($request)
     {
-        $credentials = $request->only(['email', 'password']);
-        if (!$token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+        if (!$token = auth()->attempt($request)) {
+            throw new Exception("Login failed");
         }
-        return $json = [
-            'access_token' => $token,
+        return [
+            'acess_token' => $token,
             'token_type' => 'bearer',
             'expires_in' => auth()->factory()->getTTL() * 60
         ];

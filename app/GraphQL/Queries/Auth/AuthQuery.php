@@ -1,16 +1,18 @@
 <?php
 
-namespace App\GraphQL\Mutations\Auth;
+declare(strict_types=1);
+
+namespace App\GraphQL\Queries\Auth;
 
 use App\Repository\AcessUserRepositoryInterface;
 use Closure;
-use Exception;
 use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
-use Rebing\GraphQL\Support\Mutation;
+use Rebing\GraphQL\Support\Query;
+use Rebing\GraphQL\Support\SelectFields;
 
-class AuthorizationUserMutation extends Mutation
+class AuthQuery extends Query
 {
     private AcessUserRepositoryInterface $acessUserRepository;
 
@@ -18,9 +20,10 @@ class AuthorizationUserMutation extends Mutation
     {
         $this->acessUserRepository = $acessUserRepository;
     }
+
     protected $attributes = [
-        'name' => 'authorizationUser',
-        'description' => 'A mutation what authorization user'
+        'name' => 'auth',
+        'description' => 'A query'
     ];
 
     public function type(): Type
@@ -31,15 +34,17 @@ class AuthorizationUserMutation extends Mutation
     public function args(): array
     {
         return [
-            'email' => [
-                'name' => 'email',
+            'acess_token' => [
+                'name' => 'acess_token',
                 'type' => Type::string(),
-                'rules' => 'required'
             ],
-            'password' => [
-                'name' => 'password',
+            'token_type' => [
+                'name' => 'token_type',
                 'type' => Type::string(),
-                'rules' => 'required'
+            ],
+            'expires_in' => [
+                'name' => 'expires_in',
+                'type' => Type::string(),
             ],
         ];
     }

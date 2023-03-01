@@ -76,13 +76,16 @@ return [
         'default' => [
             'query' => [
                 \App\GraphQL\Queries\User\UsersQuery::class,
+                \App\GraphQL\Queries\Auth\AuthQuery::class,
             ],
             'mutation' => [
                 \App\GraphQL\Mutations\User\CreateUserMutation::class,
+                \App\GraphQL\Mutations\Auth\AuthorizationUserMutation::class,
             ],
             // The types only available in this schema
             'types' => [
                 \App\GraphQL\Types\User\UserType::class,
+                \App\GraphQL\Types\Auth\AuthType::class,
             ],
 
             // Laravel HTTP middleware
@@ -94,14 +97,6 @@ return [
             // An array of middlewares, overrides the global ones
             'execution_middleware' => null,
         ],
-        'user' => [
-            'query' => [\App\GraphQL\Queries\User\UsersQuery::class,],
-            'mutation' => [],
-            'types' => [
-                \App\GraphQL\Types\User\UserType::class,
-            ],
-            'middleware' => ['login_auth'],
-        ]
     ],
 
     // The global types available to all schemas.
