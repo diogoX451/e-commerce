@@ -8,7 +8,9 @@ use App\Repository\UserRepositoryInterface;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Query;
-
+use Closure;
+use GraphQL\Type\Definition\ResolveInfo;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UsersQuery extends Query
 {
@@ -48,10 +50,6 @@ class UsersQuery extends Query
             ],
             'phone' => [
                 'name' => 'phone',
-                'type' => Type::string(),
-            ],
-            'password' => [
-                'name' => 'password',
                 'type' => Type::string(),
             ],
         ];

@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\GraphQL\Types\Auth;
+namespace App\GraphQL\Authentication;
 
 use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
@@ -31,8 +31,8 @@ class AuthType extends GraphQLType
                 'description' => 'The expires in of user',
             ],
             'user' => [
-                'type' => Type::listOf(GraphQL::type('User')),
-                'description' => 'The user of auth',
+                'type' => GraphQL::type('User'),
+                'description' => 'The user of user',
             ],
         ];
     }

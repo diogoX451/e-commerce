@@ -1,6 +1,6 @@
 <?php
 
-namespace App\GraphQL\Mutations\Auth;
+namespace App\GraphQL\Authentication;
 
 use App\Repository\AcessUserRepositoryInterface;
 use Closure;

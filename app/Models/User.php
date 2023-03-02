@@ -23,7 +23,13 @@ class User extends Authenticatable implements JWTSubject
 
     protected $hidden = [
         'password',
-        'remember_token',
+    ];
+
+    protected $visable = [
+        'name',
+        'last_name',
+        'phone',
+        'email',
     ];
 
     protected $casts = [
@@ -33,11 +39,6 @@ class User extends Authenticatable implements JWTSubject
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
-    }
-
-    public function findForPassport($index)
-    {
-        return $this->where('email', $index)->orWhere('phone', $index)->first();
     }
 
     public function getJWTIdentifier()
