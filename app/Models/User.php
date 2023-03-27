@@ -36,6 +36,21 @@ class User extends Authenticatable implements JWTSubject
         'email_verified_at' => 'datetime',
     ];
 
+    public function permissions()
+    {
+        return $this->morphToMany(Permission::class, 'users_permissions');
+    }
+
+    public function roles()
+    {
+        return $this->morphToMany(Role::class, 'role_user');
+    }
+
+    public function address()
+    {
+        return $this->belongsToMany(Endereco::class, 'address_user', 'user_id', 'address_id');
+    }
+
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);

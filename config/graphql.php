@@ -26,7 +26,7 @@ return [
 
     // The name of the default schema
     // Used when the route group is directly accessed
-    'default_schema' => 'default',
+    'default_schema' =>  'default',
 
     'batching' => [
         // Whether to support GraphQL batching or not.
@@ -77,17 +77,19 @@ return [
             'query' => [
                 \App\GraphQL\Authentication\AuthQuery::class,
                 \App\GraphQL\Queries\User\UsersQuery::class,
+                \App\GraphQL\Queries\Address\EnderecoQuery::class,
             ],
             'mutation' => [
                 \App\GraphQL\Mutations\User\CreateUserMutation::class,
                 \App\GraphQL\Authentication\AuthorizationUserMutation::class,
+                
             ],
-            // The types only available in this schema
+
             'types' => [
                 \App\GraphQL\Types\User\UserType::class,
                 \App\GraphQL\Authentication\AuthType::class,
+                \App\GraphQL\Types\Address\EnderecoType::class,
             ],
-
             // Laravel HTTP middleware
             'middleware' => null,
 
@@ -97,31 +99,8 @@ return [
             // An array of middlewares, overrides the global ones
             'execution_middleware' => null,
         ],
-        'user' => [
-            'query' => [
-                \App\GraphQL\Queries\User\UsersQuery::class,
-            ],
-            'mutation' => [
-                \App\GraphQL\Mutations\User\UpdateUserMutation::class,
-            ],
-            'middleware' => ['auth'],
-        ],
     ],
 
-    // The global types available to all schemas.
-    // You can then access it from the facade like this: GraphQL::type('user')
-    //
-    // Example:
-    //
-    // 'types' => [
-    //     App\GraphQL\Types\UserType::class
-    // ]
-    //
-    'types' => [
-        // ExampleType::class,
-        // ExampleRelationType::class,
-        // \Rebing\GraphQL\Support\UploadType::class,
-    ],
 
     // The types will be loaded on demand. Default is to load all types on each request
     // Can increase performance on schemes with many types

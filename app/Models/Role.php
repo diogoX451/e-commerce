@@ -13,4 +13,13 @@ class Role extends Model
         'name',
         'description'
     ];
+
+    public function user()
+    {
+        return $this->morphByMany(User::class, 'role_user');
+    }
+    public function permissions()
+    {
+        return $this->morphToMany(Permission::class, 'roles_permissions');
+    }
 }

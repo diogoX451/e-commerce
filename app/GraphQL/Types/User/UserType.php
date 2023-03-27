@@ -1,11 +1,10 @@
 <?php
 
-declare(strict_types=1);
-
 namespace App\GraphQL\Types\User;
 
 use GraphQL\Type\Definition\Type;
 use \App\Models\User;
+use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
 class UserType extends GraphQLType
@@ -14,7 +13,6 @@ class UserType extends GraphQLType
         'name' => 'User',
         'description' => 'A type for user',
         'model' => User::class,
-
     ];
 
     public function fields(): array
@@ -39,6 +37,10 @@ class UserType extends GraphQLType
             'phone' => [
                 'type' => Type::string(),
                 'description' => 'The phone of user',
+            ],
+            'address' => [
+                'type' => Type::listOf(GraphQL::type('Endereco')),
+                'description' => 'The addresses of user',
             ],
         ];
     }

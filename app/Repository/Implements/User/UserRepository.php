@@ -20,6 +20,7 @@ class UserRepository implements UserRepositoryInterface
             'password' => bcrypt($request['password']),
             'phone' => $request['phone'],
         ]);
+
         return $user;
     }
     public function delete($id)

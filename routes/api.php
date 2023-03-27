@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Http;
 
 
 
-Route::post('/login', [UserConroler::class, 'login'])->name('login');
+Route::post('/login', [UserConroler::class, 'login']);
 Route::post('/teste', [UserConroler::class, 'register']);
 
 Route::group(['prefix' => 'auth'], function () {
