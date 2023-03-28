@@ -20,12 +20,15 @@ class EnderecoRepository implements EnderecoRepositoryInterface{
             $endereco = validator($request, [
                 'street' => 'required',
                 'number' => 'required',
+                'state' => 'required',
                 'city' => 'required',
                 'country' => 'required',
                 'zip_code' => 'required',
                 'complement' => 'required',
-                'user_id' => 'required'
+                'users_id' => 'required'
             ]);
+
+            
 
             if ($endereco->fails()) {
                 return $endereco->errors();
@@ -33,7 +36,7 @@ class EnderecoRepository implements EnderecoRepositoryInterface{
 
             //user_id is required
             $endereco = Endereco::create($request);
-            $endereco->users()->attach($request['user_id']);
+            $endereco->users()->attach($request['users_id'] );
             return $endereco;
         }
         public function update($request, $id)

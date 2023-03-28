@@ -36,6 +36,10 @@ class EnderecoType extends GraphQLType
                 "type" => Type::nonNull(Type::string()),
                 "description" => "The city of the address"
             ],
+            "state" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The state of the address"
+            ],
             "country" => [
                 "type" => Type::nonNull(Type::string()),
                 "description" => "The country of the address"

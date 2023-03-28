@@ -80,8 +80,10 @@ return [
                 \App\GraphQL\Queries\Address\EnderecoQuery::class,
             ],
             'mutation' => [
+                \App\GraphQL\Mutations\Endereco\CreateEnderecoMutation::class,
                 \App\GraphQL\Mutations\User\CreateUserMutation::class,
                 \App\GraphQL\Authentication\AuthorizationUserMutation::class,
+                
                 
             ],
 

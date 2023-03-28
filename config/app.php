@@ -184,6 +184,7 @@ return [
         Tymon\JWTAuth\Providers\LaravelServiceProvider::class,
         App\Providers\RepositoryServiceProvider::class,
         App\Providers\UserServiceProvider::class,
+        App\Providers\EnderecoServiceProvider::class,
 
         /*
          * Package Service Providers...

@@ -2,21 +2,16 @@
 
 namespace App\Providers;
 
+use App\Repository\EnderecoRepositoryInterface;
+use App\Repository\Implements\Endereco\EnderecoRepository;
 use Illuminate\Support\ServiceProvider;
 
 class EnderecoServiceProvider extends ServiceProvider
 {
-    /**
-     * Register services.
-     *
-     * @return void
-     */
-    public function register()
+
+    public function register():void
     {
-        $this->app->bind(
-            App\Repository\EnderecoRepositoryInterface::class,
-            App\Repository\Implements\Endereco\EnderecoRepository::class
-        );
+        $this->app->bind(EnderecoRepositoryInterface::class, EnderecoRepository::class);
     }
 
     /**

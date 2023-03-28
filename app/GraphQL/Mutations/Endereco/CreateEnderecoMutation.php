@@ -14,16 +14,16 @@ use Rebing\GraphQL\Support\SelectFields;
 
 class CreateEnderecoMutation extends Mutation
 {
-    private EnderecoRepositoryInterface  $enderecoRepository;
+    private EnderecoRepositoryInterface $enderecoRepository;
 
-    private function __construct(EnderecoRepositoryInterface $enderecoRepository ){
+    public function __construct(EnderecoRepositoryInterface $enderecoRepository)
+    {
         $this->enderecoRepository = $enderecoRepository;
     }
 
     protected $attributes = [
         'name' => 'createEndereco',
-        'description' => 'A mutation',
-        'model' => 'createEndereco',
+        'description' => 'Criação de Endereço com Usuario'
     ];
 
     public function type(): Type
@@ -34,33 +34,37 @@ class CreateEnderecoMutation extends Mutation
     public function args(): array
     {
         return [
-            'street' => [
-                'name' => 'street',
-                'type' => Type::nonNull(Type::string()),
+            "street" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The street of the address"
             ],
-            'number' => [
-                'name' => 'number',
-                'type' => Type::nonNull(Type::string()),
+            "number" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The number of the address"
             ],
-            'city' => [
-                'name' => 'city',
-                'type' => Type::nonNull(Type::string()),
+            "city" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The city of the address"
             ],
-            'country' => [
-                'name' => 'country',
-                'type' => Type::nonNull(Type::string()),
+            "state" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The state of the address"
             ],
-            'zip_code' => [
-                'name' => 'zip_code',
-                'type' => Type::nonNull(Type::string()),
+            "country" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The country of the address"
             ],
-            'complement' => [
-                'name' => 'complement',
-                'type' => Type::string(),
+            "zip_code" => [
+                "type" => Type::nonNull(Type::string()),
+                "description" => "The postal code of the address"
             ],
-            'user_id' => [
-                'name' => 'user_id',
-                'type' => Type::nonNull(Type::int()),
+            "complement" => [
+                "type" => Type::string(),
+                "description" => "The complement of the address"
+            ],
+            "users_id" => [
+                "type" => Type::nonNull(Type::int()),
+                "description" => "The id of the user"
             ],
 
         ];
@@ -68,6 +72,6 @@ class CreateEnderecoMutation extends Mutation
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-      $this->enderecoRepository->create($args);
+        $this->enderecoRepository->create($args);
     }
 }
