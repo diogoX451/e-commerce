@@ -77,6 +77,7 @@ return [
             'query' => [
                 \App\GraphQL\Authentication\AuthQuery::class,
                 \App\GraphQL\Queries\User\UsersQuery::class,
+                \App\GraphQL\Queries\Address\EnderecosQuery::class,
                 \App\GraphQL\Queries\Address\EnderecoQuery::class,
             ],
             'mutation' => [

@@ -1,23 +1,36 @@
 <?php
 
+declare(strict_types=1);
+
 namespace App\GraphQL\Queries\Address;
 
 use App\Models\Endereco;
+use App\Repository\EnderecoRepositoryInterface;
+use Closure;
+use GraphQL\Type\Definition\ResolveInfo;
 use GraphQL\Type\Definition\Type;
-use Rebing\GraphQL\Support\Facades\GraphQL;
+use Rebing\GraphQL\Support\Facades\GraphQL as FacadesGraphQL;
 use Rebing\GraphQL\Support\Query;
+use Rebing\GraphQL\Support\SelectFields;
 
 class EnderecoQuery extends Query
 {
+    private  EnderecoRepositoryInterface $enderecoRepository;
+
+    public function __construct(EnderecoRepositoryInterface $enderecoRepository)
+    {
+        $this->enderecoRepository = $enderecoRepository;
+    }
+
     protected $attributes = [
-        'name' => 'addresses',
+        'name' => 'address',
         'description' => 'A query',
         'model' => Endereco::class,
     ];
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('Endereco'));
+        return Type::listOf(FacadesGraphQL::type('Endereco'));
     }
 
     public function args(): array
@@ -27,36 +40,11 @@ class EnderecoQuery extends Query
                 'name' => 'id',
                 'type' => Type::int(),
             ],
-            'street' => [
-                'name' => 'street',
-                'type' => Type::string(),
-            ],
-            'number' => [
-                'name' => 'number',
-                'type' => Type::string(),
-            ],
-            'city' => [
-                'name' => 'city',
-                'type' => Type::string(),
-            ],
-            'country' => [
-                'name' => 'country',
-                'type' => Type::string(),
-            ],
-            'zip_code' => [
-                'name' => 'zip_code',
-                'type' => Type::string(),
-            ],
-            'complement' => [
-                'name' => 'complement',
-                'type' => Type::string(),
-            ],
-            
         ];
     }
-    
-    public function resolve($root, $args)
+
+    public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        return Endereco::all();
+     return $this->enderecoRepository->getEndereco($args['id']);  
     }
 }

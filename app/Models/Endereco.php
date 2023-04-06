@@ -14,6 +14,7 @@ class Endereco extends Model
         'number',
         'city',
         'country',
+        'state',
         'zip_code',
         'complement',
     ];

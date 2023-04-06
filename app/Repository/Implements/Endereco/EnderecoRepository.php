@@ -11,9 +11,10 @@ class EnderecoRepository implements EnderecoRepositoryInterface{
         {
             return Endereco::all();
         }
-        public function find($id)
+        public function getEndereco($id)
         {
-            return Endereco::find($id);
+            $findId = $id;
+            return Endereco::where('id', $findId)->get();
         }
         public function create($request)
         {
@@ -28,15 +29,13 @@ class EnderecoRepository implements EnderecoRepositoryInterface{
                 'users_id' => 'required'
             ]);
 
-            
-
             if ($endereco->fails()) {
                 return $endereco->errors();
             }
 
-            //user_id is required
             $endereco = Endereco::create($request);
             $endereco->users()->attach($request['users_id'] );
+            
             return $endereco;
         }
         public function update($request, $id)

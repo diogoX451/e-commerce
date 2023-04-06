@@ -1,0 +1,125 @@
+"return":[ 
+    {
+        "id": "7c643363-8f4c-433e-bf9e-33239009daf2",
+        "name": "Tamanho",
+        "productId": "50bbef36-f51d-41b2-96f7-2689797af8ee",
+        "items": [
+            {
+                "id": "bd67d6ed-6501-4c9f-a4f4-6ec239d85d56",
+                "name": "P",
+                "productVariationCategoryId": "7c643363-8f4c-433e-bf9e-33239009daf2"
+            },
+            {
+                "id": "90a7ac01-e0cd-4b7a-b9be-d43cbf118283",
+                "name": "M",
+                "productVariationCategoryId": "7c643363-8f4c-433e-bf9e-33239009daf2"
+            },
+            {
+                "id": "28948c06-613d-426c-bb1c-fcf79afca4d8",
+                "name": "G",
+                "productVariationCategoryId": "7c643363-8f4c-433e-bf9e-33239009daf2"
+            }
+        ]
+    },
+    {
+        "id": "89607119-ac10-4f51-ad3d-fdead198ad27",
+        "name": "Cor",
+        "productId": "50bbef36-f51d-41b2-96f7-2689797af8ee",
+        "items": [
+            {
+                "id": "7ec678dc-f28d-4d5e-9410-68e59cdddb5c",
+                "name": "preto",
+                "productVariationCategoryId": "89607119-ac10-4f51-ad3d-fdead198ad27"
+            },
+            {
+                "id": "c471bd3d-eb20-4d64-bf2b-13dbe85534c1",
+                "name": "branco",
+                "productVariationCategoryId": "89607119-ac10-4f51-ad3d-fdead198ad27"
+            },
+            {
+                "id": "17e68819-e0eb-443a-ace1-dce46bef66ca",
+                "name": "amarelo",
+                "productVariationCategoryId": "89607119-ac10-4f51-ad3d-fdead198ad27"
+            }
+        ]
+    },
+    {
+        "id": "68abd39b-869d-42fc-9323-e263cf2e3c02",
+        "name": "Tecido",
+        "productId": "50bbef36-f51d-41b2-96f7-2689797af8ee",
+        "items": [
+            {
+                "id": "749473da-f4d7-4137-af9e-59fec10cfba8",
+                "name": "algodao",
+                "productVariationCategoryId": "68abd39b-869d-42fc-9323-e263cf2e3c02"
+            },
+            {
+                "id": "78857f8f-14d4-4cca-ab1b-3d2b5dcb5055",
+                "name": "oxford",
+                "productVariationCategoryId": "68abd39b-869d-42fc-9323-e263cf2e3c02"
+            }
+        ]
+    }
+][
+    {
+        "id": "7c643363-8f4c-433e-bf9e-33239009daf2",
+        "name": "Tamanho",
+        "productId": "50bbef36-f51d-41b2-96f7-2689797af8ee",
+        "items": [
+            {
+                "id": "bd67d6ed-6501-4c9f-a4f4-6ec239d85d56",
+                "name": "P",
+                "productVariationCategoryId": "7c643363-8f4c-433e-bf9e-33239009daf2"
+            },
+            {
+                "id": "90a7ac01-e0cd-4b7a-b9be-d43cbf118283",
+                "name": "M",
+                "productVariationCategoryId": "7c643363-8f4c-433e-bf9e-33239009daf2"
+            },
+            {
+                "id": "28948c06-613d-426c-bb1c-fcf79afca4d8",
+                "name": "G",
+                "productVariationCategoryId": "7c643363-8f4c-433e-bf9e-33239009daf2"
+            }
+        ]
+    },
+    {
+        "id": "89607119-ac10-4f51-ad3d-fdead198ad27",
+        "name": "Cor",
+        "productId": "50bbef36-f51d-41b2-96f7-2689797af8ee",
+        "items": [
+            {
+                "id": "7ec678dc-f28d-4d5e-9410-68e59cdddb5c",
+                "name": "preto",
+                "productVariationCategoryId": "89607119-ac10-4f51-ad3d-fdead198ad27"
+            },
+            {
+                "id": "c471bd3d-eb20-4d64-bf2b-13dbe85534c1",
+                "name": "branco",
+                "productVariationCategoryId": "89607119-ac10-4f51-ad3d-fdead198ad27"
+            },
+            {
+                "id": "17e68819-e0eb-443a-ace1-dce46bef66ca",
+                "name": "amarelo",
+                "productVariationCategoryId": "89607119-ac10-4f51-ad3d-fdead198ad27"
+            }
+        ]
+    },
+    {
+        "id": "68abd39b-869d-42fc-9323-e263cf2e3c02",
+        "name": "Tecido",
+        "productId": "50bbef36-f51d-41b2-96f7-2689797af8ee",
+        "items": [
+            {
+                "id": "749473da-f4d7-4137-af9e-59fec10cfba8",
+                "name": "algodao",
+                "productVariationCategoryId": "68abd39b-869d-42fc-9323-e263cf2e3c02"
+            },
+            {
+                "id": "78857f8f-14d4-4cca-ab1b-3d2b5dcb5055",
+                "name": "oxford",
+                "productVariationCategoryId": "68abd39b-869d-42fc-9323-e263cf2e3c02"
+            }
+        ]
+    }
+]

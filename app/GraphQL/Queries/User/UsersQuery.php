@@ -19,7 +19,7 @@ class UsersQuery extends Query
     public function authorize($root, array $args, $ctx, ?ResolveInfo $resolveInfo = null, ?Closure $getSelectFields = null): bool
     {
         try {
-            $user = JWTAuth::parseToken()->authenticate();
+        JWTAuth::parseToken()->authenticate();
         } catch (\Exception $e) {
             if ($e instanceof \Tymon\JWTAuth\Exceptions\TokenInvalidException) {
                 return false;
