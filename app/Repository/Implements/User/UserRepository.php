@@ -27,7 +27,7 @@ class UserRepository implements UserRepositoryInterface
     {
         return User::destroy($id);
     }
-    public function find($id)
+    public function getUser($id)
     {
         return User::find($id);
     }

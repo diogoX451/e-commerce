@@ -77,6 +77,7 @@ return [
             'query' => [
                 \App\GraphQL\Authentication\AuthQuery::class,
                 \App\GraphQL\Queries\User\UsersQuery::class,
+                \App\GraphQL\Queries\User\UserQuery::class,
                 \App\GraphQL\Queries\Address\EnderecosQuery::class,
                 \App\GraphQL\Queries\Address\EnderecoQuery::class,
             ],
@@ -84,8 +85,7 @@ return [
                 \App\GraphQL\Mutations\Endereco\CreateEnderecoMutation::class,
                 \App\GraphQL\Mutations\User\CreateUserMutation::class,
                 \App\GraphQL\Authentication\AuthorizationUserMutation::class,
-                
-                
+                \App\GraphQL\Authentication\LogoutUserMutation::class,
             ],
 
             'types' => [
