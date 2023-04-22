@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Endereco extends Model
 {
-    use HasFactory  ;
+    use HasFactory;
     
     protected $fillable = [
         'street',

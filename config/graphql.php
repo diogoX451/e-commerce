@@ -86,12 +86,14 @@ return [
                 \App\GraphQL\Mutations\User\CreateUserMutation::class,
                 \App\GraphQL\Authentication\AuthorizationUserMutation::class,
                 \App\GraphQL\Authentication\LogoutUserMutation::class,
+                \App\GraphQL\Mutations\Stock\CreateCategoryMutation::class,
             ],
 
             'types' => [
                 \App\GraphQL\Types\User\UserType::class,
                 \App\GraphQL\Authentication\AuthType::class,
                 \App\GraphQL\Types\Address\EnderecoType::class,
+                \App\GraphQL\Types\Stock\CategoryType::class,
             ],
             // Laravel HTTP middleware
             'middleware' => null,
