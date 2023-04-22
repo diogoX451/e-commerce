@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->register(RepositoryServiceProvider::class);
         $this->app->register(UserServiceProvider::class);
         $this->app->register(EnderecoServiceProvider::class);
-        $this->app->register(StockServiceProvider::class);
+        $this->app->register(StockRepositoryProvider::class);
 
     }
 

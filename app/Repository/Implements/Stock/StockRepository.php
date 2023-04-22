@@ -3,6 +3,7 @@
 namespace App\Repository\Implements\Stock;
 
 use App\Models\Category;
+use App\Repository\StockRepositoryInterface;
 
 class StockRepository implements StockRepositoryInterface
 {
@@ -19,7 +20,7 @@ class StockRepository implements StockRepositoryInterface
     public function updateCategory($category){
         $this->entities->update($category);
     }
-    
+
     public function deleteCategory($category){
         $this->entities->delete($category);
     }

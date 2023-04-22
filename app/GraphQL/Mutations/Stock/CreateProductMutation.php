@@ -11,17 +11,17 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class CreateCategoryMutation extends Mutation{
+class CreateProductMutation extends Mutation{
 
 
     protected $attributes = [
-        'name' => 'createCategory',
-        'description' => 'A type for category',
+        'name' => 'createProduct',
+        'description' => 'A type for Product',
     ];
 
     public function type(): Type
     {
-        return GraphQL::type('Category');
+        return GraphQL::type('Products');
     }
 
     public function args(): array
@@ -32,11 +32,23 @@ class CreateCategoryMutation extends Mutation{
             ],
             'description' => [
                 'type' => Type::nonNull(Type::string()),
+            ],
+            'price' => [
+                'type' => Type::nonNull(Type::string()),
+            ],
+            'image' => [
+                'type' => Type::nonNull(Type::string()),
+            ],
+            'is_variation' => [
+                'type' => Type::nonNull(Type::boolean()),
+            ],
+            'category'=> [
+                'type' => Type::nonNull(Type::string()),
             ]
         ];
     }
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields ){
-        return (new StockServices())->createCategory($args);
+        return (new StockServices())->createProduct($args);
     }
 }

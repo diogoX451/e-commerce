@@ -6,10 +6,10 @@ use App\Repository\Implements\Stock\StockRepository;
 use App\Repository\StockRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
 
-class StockServiceProvider extends ServiceProvider
+class StockRepositoryProvider extends ServiceProvider
 {
 
-    public function register(): void
+    public function register():void
     {
         $this->app->bind(StockRepositoryInterface::class, StockRepository::class);
     }
