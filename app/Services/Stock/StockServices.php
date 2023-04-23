@@ -9,7 +9,7 @@ use App\Repository\StockRepositoryInterface;
 use Illuminate\Support\Str;
 
 class StockServices {
-    //use transations em caso do stock
+
     private $uuid;
 
     public function __construct(){
@@ -29,26 +29,25 @@ class StockServices {
     
     public function createProduct($product){
         
-        $category =  Category::where('name', '=', $product['name'])->first();
-        
+        $category =  Category::where("name", "ilike", "%{$product['category']}%")->first();
+
         if(!$category){
             return 'Category not found';
         }
         
-        $variationProduct = $product['is_variation'];
-
-        if(!$variationProduct){
-            $product = Product::create([
+        if(!$product['is_variation']){
+            $products = Product::create([
+                'id' => $this->uuid,
                 'name' => $product['name'],
                 'description' => $product['description'],
                 'price' => $product['price'],
                 'image' => $product['image'],
+                'qtd' => $product['qtd'],
                 'is_variation' => $product['is_variation'],
-                'category_id' => $category->id,
-                'id' => $this->uuid
+                'category_id' => $category->id
             ]);
-            return $product;
+            return $products;
         }
-        
+
     }
 }

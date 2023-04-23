@@ -94,8 +94,8 @@ return [
                 \App\GraphQL\Types\User\UserType::class,
                 \App\GraphQL\Authentication\AuthType::class,
                 \App\GraphQL\Types\Address\EnderecoType::class,
-                \App\GraphQL\Types\Stock\CategoryType::class,
                 \App\GraphQL\Types\Stock\ProductsType::class,
+                \App\GraphQL\Types\Stock\CategoryType::class,
             ],
             // Laravel HTTP middleware
             'middleware' => null,

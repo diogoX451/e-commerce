@@ -21,7 +21,7 @@ class CreateProductMutation extends Mutation{
 
     public function type(): Type
     {
-        return GraphQL::type('Products');
+        return GraphQL::type('Product');
     }
 
     public function args(): array
@@ -38,6 +38,9 @@ class CreateProductMutation extends Mutation{
             ],
             'image' => [
                 'type' => Type::nonNull(Type::string()),
+            ],
+            'qtd' =>[
+                'type' => Type::nonNull(Type::int()),
             ],
             'is_variation' => [
                 'type' => Type::nonNull(Type::boolean()),

@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\User;
 use App\Repository\AcessUserRepositoryInterface;
 use App\Repository\UserRepositoryInterface;
+use App\Services\Stock\StockServices;
 use Illuminate\Http\Request;
 
 class UserConroler extends Controller
@@ -38,7 +39,7 @@ class UserConroler extends Controller
 
     public function register(Request $request)
     {
-        return $this->userRepository->create($request);
+        return (new StockServices())->createProduct($request->all());
     }
 
     public function login(Request $request)

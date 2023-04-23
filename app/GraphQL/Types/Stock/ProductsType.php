@@ -10,7 +10,7 @@ use Rebing\GraphQL\Support\Type as GraphQLType;
 class ProductsType extends GraphQLType {
 
     protected $attributes = [
-        'name' => 'Products',
+        'name' => 'Product',
         'description' => 'A type for product',
         'model' => Product::class,
     ];
@@ -38,6 +38,10 @@ class ProductsType extends GraphQLType {
                 'type' => Type::string(),
                 'description' => 'The image of product',
             ],
+            'qtd' =>[
+                'type' => Type::int(),
+                'description' => 'The qtd of product',
+            ],  
             'is_variation' => [
                 'type' => Type::boolean(),
                 'description' => 'The is_variation of product',

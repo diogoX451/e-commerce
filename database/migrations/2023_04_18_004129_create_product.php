@@ -15,6 +15,7 @@ return new class extends Migration
             $table->string('description');
             $table->string('price');
             $table->string('image');
+            $table->integer('qtd');
             $table->boolean('is_variation');
             $table->foreignUuid('category_id')->constrained('category');
             $table->timestamps();
