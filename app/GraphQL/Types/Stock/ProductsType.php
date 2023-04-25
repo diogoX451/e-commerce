@@ -46,10 +46,15 @@ class ProductsType extends GraphQLType {
                 'type' => Type::boolean(),
                 'description' => 'The is_variation of product',
             ],
+            'variation' => [
+                'type' => Type::listOf(Type::string()),
+                'description' => 'The variation of product',
+            ],
             'category' => [
                 'type' => Type::listOf(GraphQL::type('Category')),
                 'description' => 'The product of product',
             ],
+
         ];
     }
 

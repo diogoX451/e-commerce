@@ -47,6 +47,9 @@ class CreateProductMutation extends Mutation{
             ],
             'category'=> [
                 'type' => Type::nonNull(Type::string()),
+            ],
+            'variation' => [
+                'type' => Type::listOf(Type::string()),
             ]
         ];
     }

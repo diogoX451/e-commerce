@@ -5,8 +5,8 @@ namespace App\Services\Stock;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Repository\StockRepositoryInterface;
 use Illuminate\Support\Str;
+use ProductWithCategory;
 
 class StockServices {
 
@@ -48,6 +48,30 @@ class StockServices {
             ]);
             return $products;
         }
+
+       
+        foreach($product['variation'] as $variation){
+            ProductWithCategory::create([
+                'id' => $this->uuid,
+                'name' => $variation,
+                'product_id' => $product->id
+            ]);
+        }
+        
+        $product = Product::create([
+            'id' => $this->uuid,
+            'name' => $product['name'],
+            'description' => $product['description'],
+            'price' => $product['price'],
+            'image' => $product['image'],
+            'qtd' => $product['qtd'],
+            'is_variation' => $product['is_variation'],
+            'category_id' => $category->id
+        ]);
+
+
+    
+        return $product;
 
     }
 }

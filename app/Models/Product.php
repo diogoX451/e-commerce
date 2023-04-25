@@ -20,6 +20,7 @@ class Product extends Model
         'price',
         'image',
         'qtd',
+        'variation',
         'is_variation',
         'category_id',
     ];
@@ -27,5 +28,10 @@ class Product extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function productWithCategory()
+    {
+        return $this->hasMany(ProductWithCategory::class);
     }
 }
