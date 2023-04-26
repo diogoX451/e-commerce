@@ -8,15 +8,18 @@ use App\Models\Product;
 use Illuminate\Support\Str;
 use ProductWithCategory;
 
-class StockServices {
+class StockServices
+{
 
     private $uuid;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->uuid = Str::uuid()->toString();
     }
 
-    public function createCategory($category){
+    public function createCategory($category)
+    {
 
         $category = Category::create([
             'name' => $category['name'],
@@ -26,16 +29,17 @@ class StockServices {
 
         return $category;
     }
-    
-    public function createProduct($product){
-        
+
+    public function createProduct($product)
+    {
+
         $category =  Category::where("name", "ilike", "%{$product['category']}%")->first();
 
-        if(!$category){
+        if (!$category) {
             return 'Category not found';
         }
-        
-        if(!$product['is_variation']){
+
+        if (!$product['is_variation']) {
             $products = Product::create([
                 'id' => $this->uuid,
                 'name' => $product['name'],
@@ -49,15 +53,6 @@ class StockServices {
             return $products;
         }
 
-       
-        foreach($product['variation'] as $variation){
-            ProductWithCategory::create([
-                'id' => $this->uuid,
-                'name' => $variation,
-                'product_id' => $product->id
-            ]);
-        }
-        
         $product = Product::create([
             'id' => $this->uuid,
             'name' => $product['name'],
@@ -69,9 +64,16 @@ class StockServices {
             'category_id' => $category->id
         ]);
 
+        foreach ($product['variation'] as $variation) {
+            ProductWithCategory::create([
+                'id' => $this->uuid,
+                'name' => $variation,
+                'product_id' => $product->id
+            ]);
+        }
 
-    
+
+
         return $product;
-
     }
 }
