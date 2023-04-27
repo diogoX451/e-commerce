@@ -72,8 +72,6 @@ class StockServices
             ]);
         }
 
-
-
         return $product;
     }
 }
