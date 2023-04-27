@@ -40,6 +40,10 @@ class LogoutUserMutation extends Mutation
                 'type' => Type::string(),
                 'description' => 'The expires in of user',
             ],
+            'message' => [
+                'type' => Type::string(),
+                'description' => 'The message of user',
+            ],
         ];
     }
 

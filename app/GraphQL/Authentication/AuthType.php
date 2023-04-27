@@ -30,6 +30,10 @@ class AuthType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The expires in of user',
             ],
+            'message' => [
+                'type' => Type::string(),
+                'description' => 'The message of user',
+            ],
             'user' => [
                 'type' => GraphQL::type('User'),
                 'description' => 'The user of user',

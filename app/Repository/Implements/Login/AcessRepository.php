@@ -5,6 +5,7 @@ namespace App\Repository\Implements\Login;
 use App\Models\User;
 use App\Repository\AcessUserRepositoryInterface;
 use Exception;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AcessRepository implements AcessUserRepositoryInterface
 {
@@ -23,7 +24,11 @@ class AcessRepository implements AcessUserRepositoryInterface
     }
     public function logout()
     {
-        auth()->logout();
-        return response()->json(['message' => 'Successfully logged out']);
+        JWTAuth::getToken();
+        JWTAuth::invalidate();
+        JWTAuth::parseToken()->invalidate(true);
+        return [
+            'message' => 'Successfully logged out'
+        ];
     }
 }
