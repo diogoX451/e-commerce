@@ -2,6 +2,7 @@
 
 namespace App\Repository\Implements\Login;
 
+use App\Models\User;
 use App\Repository\AcessUserRepositoryInterface;
 use Exception;
 
@@ -10,8 +11,9 @@ class AcessRepository implements AcessUserRepositoryInterface
     public function login($request)
     {
         if (!$token = auth()->attempt($request)) {
-            throw new Exception("Login failed");
+            throw new Exception('Unauthorized');
         }
+
         return [
             'acess_token' => $token,
             'token_type' => 'bearer',

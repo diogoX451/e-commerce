@@ -34,7 +34,8 @@ class EnderecoRepository implements EnderecoRepositoryInterface{
             }
 
             $endereco = Endereco::create($request);
-            $endereco->users()->attach($request['users_id'] );
+            
+            $endereco->users()->attach($request['users_id']);
             
             return $endereco;
         }

@@ -28,7 +28,7 @@ class CreateEnderecoMutation extends Mutation
 
     public function type(): Type
     {
-        return Type::listOf(GraphQL::type('Endereco'));
+        return GraphQL::type('Endereco');
     }
 
     public function args(): array
@@ -72,6 +72,6 @@ class CreateEnderecoMutation extends Mutation
 
     public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields)
     {
-        $this->enderecoRepository->create($args);
+      return $this->enderecoRepository->create($args);
     }
 }

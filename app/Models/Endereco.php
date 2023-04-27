@@ -8,6 +8,8 @@ use Illuminate\Database\Eloquent\Model;
 class Endereco extends Model
 {
     use HasFactory;
+
+    protected $table = 'address';
     
     protected $fillable = [
         'street',
