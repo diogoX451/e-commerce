@@ -53,18 +53,6 @@ class StockServices
             return $products;
         }
 
-<<<<<<< HEAD
-=======
-       
-        foreach($product['variation'] as $variation){
-            ProductWithCategory::create([
-                'id' => $this->uuid,
-                'name' => $variation,
-                'product_id' => $product->id
-            ]);
-        }
-
->>>>>>> 096edcd (MELHORIA NO LOGIN, ARRUMANDO OS ADDRESS ID E RETURNS)
         $product = Product::create([
             'id' => $this->uuid,
             'name' => $product['name'],
@@ -76,7 +64,6 @@ class StockServices
             'category_id' => $category->id
         ]);
 
-<<<<<<< HEAD
         foreach ($product['variation'] as $variation) {
             ProductWithCategory::create([
                 'id' => $this->uuid,
@@ -87,8 +74,6 @@ class StockServices
 
 
 
-=======
->>>>>>> 096edcd (MELHORIA NO LOGIN, ARRUMANDO OS ADDRESS ID E RETURNS)
         return $product;
     }
 }
