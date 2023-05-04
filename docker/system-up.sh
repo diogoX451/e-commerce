@@ -12,8 +12,8 @@ sudo docker build -t ecommerce.api ${BASEDIR}
 
 
 echo "--------- CRIANDO CONTAINER ----------"
-sudo docker run --name ecommerce.api -idt --network ecommerce_net -p 16:16  -v ${BASEDIR}/..:/var/www/html ecommerce.api
-sudo docker run --name ecommerce.db -idt --network ecommerce_net -e POSTGRES_PASSWORD=admin -e PGDATA=/var/lib/postgresql/data/pgecommerce -v ${BASEDIR}/../../db:/var/lib/postgresql/data postgres
+sudo docker run --restart=always --name ecommerce.api -idt --network ecommerce_net -p 16:16  -v ${BASEDIR}/..:/var/www/html ecommerce.api
+sudo docker run --restart=always --name ecommerce.db -idt --network ecommerce_net -e POSTGRES_PASSWORD=admin -e PGDATA=/var/lib/postgresql/data/pgecommerce -v ${BASEDIR}/../../db:/var/lib/postgresql/data postgres
 echo "--------- CRIANDO HOSTS ----------"
 if grep "172.18.0.2" /etc/hosts> /dev/null
 then

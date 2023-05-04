@@ -42,7 +42,7 @@ class UsersQuery extends Query
         $this->userRepository = $userRepository;
     }
     protected $attributes = [
-        'name' => 'user',
+        'name' => 'users',
         'description' => 'A query with '
     ];
 

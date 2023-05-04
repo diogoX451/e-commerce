@@ -5,8 +5,8 @@ namespace App\Services\Stock;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductWithCategory;
 use Illuminate\Support\Str;
-use ProductWithCategory;
 
 class StockServices
 {
@@ -53,7 +53,7 @@ class StockServices
             return $products;
         }
 
-        $product = Product::create([
+        $create = Product::create([
             'id' => $this->uuid,
             'name' => $product['name'],
             'description' => $product['description'],
@@ -66,12 +66,12 @@ class StockServices
 
         foreach ($product['variation'] as $variation) {
             ProductWithCategory::create([
-                'id' => $this->uuid,
+                'id' => Str::uuid()->toString(),
                 'name' => $variation,
-                'product_id' => $product->id
+                'product_id' => $create->id
             ]);
         }
 
-        return $product;
+        return $create;
     }
 }
