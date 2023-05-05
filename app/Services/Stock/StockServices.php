@@ -74,4 +74,21 @@ class StockServices
 
         return $create;
     }
+
+    public function createItensCategoryProduct($itens)
+    {
+
+        $categoryTypes = ProductWithCategory::where('id', $itens['category_product_id'])->first();
+        $itensCategory = [];
+        $itensTeste = [];
+        $index = 0;
+        foreach ($itens['name'] as $name) {
+            $itensTeste[] = $name;
+            $index++;
+        }
+        for ($i = 0; $i < $index; $i++) {
+            $itensCategory[] = $itensTeste[$i] . ' ' . $categoryTypes->name;
+        }
+        return $itensCategory;
+    }
 }
