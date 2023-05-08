@@ -5,6 +5,7 @@ namespace App\Services\Stock;
 
 use App\Models\Category;
 use App\Models\Product;
+use App\Models\ProductCategoryItens;
 use App\Models\ProductWithCategory;
 use Illuminate\Support\Str;
 
@@ -75,41 +76,40 @@ class StockServices
         return $create;
     }
 
+
     public function createItensCategoryProduct($itens)
     {
-
-        // $categoryTypes = ProductWithCategory::where('id', $itens['category_product_id'])->first();
-        // $itensCategory = [];
-        // $itensTeste = [];
-        // $index = 0;
-        // foreach ($itens['name'] as $name) {
-        //     $itensTeste[] = $name;
-        //     $index++;
-        // }
-        // for ($i = 0; $i < $index; $i++) {
-        //     $itensCategory[] = $itensTeste[$i] . ' ' . $categoryTypes->name;
-        // }
-        // return $itensCategory;
-        $product = Product::findOrFail($itens['category_product_id']);
-        $variation_options = $product->productWithCategory;
-        $variations = [];
-        $itensVariantons = [];
+        $categoryProduct = ProductWithCategory::find($itens['category_product_id']);
+        $itensProduct = [];
         $index = 0;
         foreach ($itens['name'] as $name) {
-            $itensVariantons[] = $name;
+            $itensProduct[$index]['id'] = Str::uuid()->toString();
+            $itensProduct[$index]['name'] = $name;
+            $itensProduct[$index]['description'] = $itens['description'][$index];
+            $itensProduct[$index]['variations_category_id'] = $categoryProduct->id;
             $index++;
         }
-
-        foreach ($variation_options as $option) {
-            $values = $option->pluck('name')->toArray();
-            $variations[] = $values;
-        }
-
-        $combinations = $this->cartesianProduct($itensVariantons);
-        foreach ($combinations as $combination) {
-            return $combination;
-        }
+        ProductCategoryItens::insert($itensProduct);
+        return $itensProduct;
     }
+    public function generateVariations($variation)
+    {
+        $product = ProductWithCategory::where('product_id', $variation['product_id'])->get();
+        // $category = $product->ProductWithItens;
+        // $categoryItens = $category->productWithCategory->items;
+
+        $itensVariation = $product->each(function ($itens) {
+            $itens->itensCategory;
+        });
+        $itensVariation = [];
+        foreach ($itensVariation as $itens) {
+            foreach ($itens->itensCategory as $item) {
+                $itensVariation = $item->name;
+            }
+        }
+        return  $itensVariation;
+    }
+
     public function cartesianProduct($arrays)
     {
         $result = array();
@@ -133,9 +133,5 @@ class StockServices
             }
         }
         return $result;
-    }
-
-    private function create_variations()
-    {
     }
 }

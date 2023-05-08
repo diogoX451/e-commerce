@@ -14,11 +14,12 @@ class ProductCategoryItens extends Model
     protected $fillable = [
         'id',
         'name',
+        'description',
         'variations_category_id'
     ];
 
-    public function ProductWithCategory()
+    public function categoryItens()
     {
-        return $this->belongsTo(ProductWithCategory::class);
+        return $this->belongsTo(ProductWithCategory::class, 'variations_category_id');
     }
 }

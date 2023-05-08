@@ -19,8 +19,8 @@ class ProductWithCategory extends Model
     {
         return $this->belongsTo(Product::class);
     }
-    public function productCategoryItens()
+    public function itensCategory()
     {
-        return $this->hasMany(ProductCategoryItens::class);
+        return $this->hasMany(ProductCategoryItens::class, 'variations_category_id');
     }
 }

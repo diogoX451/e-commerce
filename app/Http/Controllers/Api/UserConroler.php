@@ -39,7 +39,7 @@ class UserConroler extends Controller
 
     public function register(Request $request)
     {
-        return (new StockServices())->createItensCategoryProduct($request->all());
+        return (new StockServices())->generateVariations($request->all());
     }
 
     public function login(Request $request)
