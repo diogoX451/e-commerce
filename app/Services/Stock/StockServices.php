@@ -78,17 +78,64 @@ class StockServices
     public function createItensCategoryProduct($itens)
     {
 
-        $categoryTypes = ProductWithCategory::where('id', $itens['category_product_id'])->first();
-        $itensCategory = [];
-        $itensTeste = [];
+        // $categoryTypes = ProductWithCategory::where('id', $itens['category_product_id'])->first();
+        // $itensCategory = [];
+        // $itensTeste = [];
+        // $index = 0;
+        // foreach ($itens['name'] as $name) {
+        //     $itensTeste[] = $name;
+        //     $index++;
+        // }
+        // for ($i = 0; $i < $index; $i++) {
+        //     $itensCategory[] = $itensTeste[$i] . ' ' . $categoryTypes->name;
+        // }
+        // return $itensCategory;
+        $product = Product::findOrFail($itens['category_product_id']);
+        $variation_options = $product->productWithCategory;
+        $variations = [];
+        $itensVariantons = [];
         $index = 0;
         foreach ($itens['name'] as $name) {
-            $itensTeste[] = $name;
+            $itensVariantons[] = $name;
             $index++;
         }
-        for ($i = 0; $i < $index; $i++) {
-            $itensCategory[] = $itensTeste[$i] . ' ' . $categoryTypes->name;
+
+        foreach ($variation_options as $option) {
+            $values = $option->pluck('name')->toArray();
+            $variations[] = $values;
         }
-        return $itensCategory;
+
+        $combinations = $this->cartesianProduct($itensVariantons);
+        foreach ($combinations as $combination) {
+            return $combination;
+        }
+    }
+    public function cartesianProduct($arrays)
+    {
+        $result = array();
+        $arrays = array_values($arrays);
+        $sizeIn = sizeof($arrays);
+        $size = $sizeIn > 0 ? 1 : 0;
+        foreach ($arrays as $array) {
+            $size = $size * sizeof($array);
+        }
+        for ($i = 0; $i < $size; $i++) {
+            $result[$i] = array();
+            for ($j = 0; $j < $sizeIn; $j++) {
+                array_push($result[$i], current($arrays[$j]));
+            }
+            for ($j = ($sizeIn - 1); $j >= 0; $j--) {
+                if (next($arrays[$j])) {
+                    break;
+                } elseif (isset($arrays[$j])) {
+                    reset($arrays[$j]);
+                }
+            }
+        }
+        return $result;
+    }
+
+    private function create_variations()
+    {
     }
 }
