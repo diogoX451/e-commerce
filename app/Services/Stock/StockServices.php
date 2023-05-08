@@ -95,19 +95,20 @@ class StockServices
     public function generateVariations($variation)
     {
         $product = ProductWithCategory::where('product_id', $variation['product_id'])->get();
-        // $category = $product->ProductWithItens;
-        // $categoryItens = $category->productWithCategory->items;
-
         $itensVariation = $product->each(function ($itens) {
             $itens->itensCategory;
         });
-        $itensVariation = [];
+        $variations = [[]];
         foreach ($itensVariation as $itens) {
-            foreach ($itens->itensCategory as $item) {
-                $itensVariation = $item->name;
+            $newVariation = [];
+            foreach ($variations as $variation) {
+                foreach ($itens->itensCategory as $item) {
+                    $newVariation[] = array_merge($variation, [$item->name]);
+                }
             }
+            $variations = $newVariation;
         }
-        return  $itensVariation;
+        return  $variations;
     }
 
     public function cartesianProduct($arrays)
