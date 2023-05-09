@@ -106,16 +106,18 @@ class StockServices
             ]);
         }
 
+        $this->generateVariations($categoryProduct->product_id);
 
         return $itensProduct;
     }
-    public function generateVariations($variation)
+
+    private function generateVariations($variation)
     {
         $product = ProductWithCategory::where('product_id', $variation['product_id'])->get();
         $findIdVariation = ProductVariations::where('product_id', $variation['product_id'])->get();
         $index = 0;
         $variationCat = [];
-        $itensVariation = $product->each(function ($itens, $variation) {
+        $itensVariation = $product->each(function ($itens) {
             $itens->itensCategory;
         });
         $variations = [[]];
@@ -128,18 +130,18 @@ class StockServices
             }
             $variations = $newVariation;
         }
+
         $finds = [];
         foreach ($variations as $var) {
             foreach ($findIdVariation as $find) {
-                if ($find->variations_products_category_items_id === $var[0]) {
-                    continue;
+                if ($find->variations_products_category_items_id === $var[1]) {
+                    $finds[] = $find->id;
                 }
-                $finds[] = $find->id;
             }
             $variationCat[] = [
                 'id' => Str::uuid()->toString(),
                 'variations_products_id' => $finds[$index],
-                'variations_products_category_items_id' => $var[0]
+                'variations_products_category_items_id' => $variations[$index][0],
             ];
             $index++;
         }
