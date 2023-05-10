@@ -106,12 +106,12 @@ class StockServices
             ]);
         }
 
-        $this->generateVariations($categoryProduct->product_id);
+        // $this->generateVariations($categoryProduct->product_id);
 
         return $itensProduct;
     }
 
-    private function generateVariations($variation)
+    public function generateVariations($variation)
     {
         $product = ProductWithCategory::where('product_id', $variation['product_id'])->get();
         $findIdVariation = ProductVariations::where('product_id', $variation['product_id'])->get();

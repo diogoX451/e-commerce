@@ -80,6 +80,7 @@ return [
                 \App\GraphQL\Queries\User\UserQuery::class,
                 \App\GraphQL\Queries\Address\EnderecosQuery::class,
                 \App\GraphQL\Queries\Address\EnderecoQuery::class,
+                \App\GraphQL\Queries\Stock\ProductQuery::class,
             ],
             'mutation' => [
                 \App\GraphQL\Mutations\Endereco\CreateEnderecoMutation::class,
@@ -88,6 +89,7 @@ return [
                 \App\GraphQL\Authentication\LogoutUserMutation::class,
                 \App\GraphQL\Mutations\Stock\CreateCategoryMutation::class,
                 \App\GraphQL\Mutations\Stock\CreateProductMutation::class,
+                \App\GraphQL\Mutations\Stock\CreateCategoryItens::class,
             ],
 
             'types' => [
@@ -96,6 +98,8 @@ return [
                 \App\GraphQL\Types\Address\EnderecoType::class,
                 \App\GraphQL\Types\Stock\ProductsType::class,
                 \App\GraphQL\Types\Stock\CategoryType::class,
+                \App\GraphQL\Types\Stock\CategoryProductType::class,
+                \App\GraphQL\Types\Stock\ItensCategoryType::class,
             ],
             // Laravel HTTP middleware
             'middleware' => null,
