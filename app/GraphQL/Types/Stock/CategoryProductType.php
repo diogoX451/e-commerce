@@ -7,7 +7,8 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as GraphQLType;
 
-class CategoryProductType extends GraphQLType {
+class CategoryProductType extends GraphQLType
+{
 
     protected $attributes = [
         'name' => 'CategoryProduct',
@@ -31,14 +32,13 @@ class CategoryProductType extends GraphQLType {
                 'description' => 'The description of category',
             ],
             'product' => [
-                'type' => Type::listOf(GraphQL::type('Product')),
+                'type' => GraphQL::type('Product'),
                 'description' => 'The products of product',
             ],
-            'itens'=> [
+            'itensCategory' => [
                 'type' => Type::listOf(GraphQL::type('ItensCategory')),
                 'description' => 'The itens of category',
             ],
         ];
     }
-
 }

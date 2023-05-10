@@ -100,6 +100,8 @@ return [
                 \App\GraphQL\Types\Stock\CategoryType::class,
                 \App\GraphQL\Types\Stock\CategoryProductType::class,
                 \App\GraphQL\Types\Stock\ItensCategoryType::class,
+                \App\GraphQL\Types\Stock\VariationCatType::class,
+                \App\GraphQL\Types\Stock\ProductVariationType::class,
             ],
             // Laravel HTTP middleware
             'middleware' => null,

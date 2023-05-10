@@ -8,15 +8,16 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type as SupportType;
 
-class ItensCategoryType extends SupportType {
-    
+class ItensCategoryType extends SupportType
+{
+
     protected $attributes = [
         'name' => 'ItensCategory',
         'description' => 'A type for category itens',
         'model' => ProductCategoryItens::class,
     ];
 
-    public function fields ():array
+    public function fields(): array
     {
         return [
             'id' => [
@@ -31,10 +32,14 @@ class ItensCategoryType extends SupportType {
                 'type' => Type::string(),
                 'description' => 'The description of category itens',
             ],
-            'categoryProduct' => [
+            'productWithCategory' => [
                 'type' => Type::listOf(GraphQL::type('CategoryProduct')),
                 'description' => 'The category of category itens',
             ],
+            'productVariationCat' => [
+                'type' => Type::listOf(GraphQL::type('VariationCat')),
+                'description' => 'The variation of category itens'
+            ]
         ];
     }
 }

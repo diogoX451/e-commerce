@@ -7,7 +7,8 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 
-class ProductQuery extends Query{
+class ProductQuery extends Query
+{
     protected $attributes = [
         'name' => 'product',
         'description' => 'A query'
@@ -30,9 +31,6 @@ class ProductQuery extends Query{
 
     public function resolve($root, $args)
     {
-        $product = Product::find($args['id'])->get();
-
-        return $product;
+        return Product::where('id', $args['id'])->first();
     }
-
 }

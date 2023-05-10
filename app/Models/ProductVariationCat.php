@@ -20,7 +20,7 @@ class ProductVariationCat extends Model
     {
         return $this->belongsToMany(ProductVariations::class, 'variationCatOption', 'variations_products_id');
     }
-    public function variationsItems()
+    public function itensCategory()
     {
         return $this->belongsToMany(ProductCategoryItens::class, 'variationCatOption', 'variations_products_category_items_id');
     }
