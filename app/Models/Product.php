@@ -36,6 +36,6 @@ class Product extends Model
     }
     public function productVariations()
     {
-        return $this->hasMany(ProductVariations::class);
+        return $this->belongsToMany(ProductVariations::class, 'variations_products', 'product_id');
     }
 }

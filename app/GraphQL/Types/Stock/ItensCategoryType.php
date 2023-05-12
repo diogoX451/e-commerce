@@ -39,7 +39,11 @@ class ItensCategoryType extends SupportType
             'productVariationCat' => [
                 'type' => Type::listOf(GraphQL::type('VariationCat')),
                 'description' => 'The variation of category itens'
-            ]
+            ],
+            'productVariations' => [
+                'type' => Type::listOf(GraphQL::type('ProductVariations')),
+                'description' => 'The variation of category itens'
+            ],
         ];
     }
 }

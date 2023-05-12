@@ -59,6 +59,14 @@ class ProductsType extends GraphQLType
                 'type' => Type::listOf(GraphQL::type('CategoryProduct')),
                 'description' => 'The product of product',
             ],
+            'productVariations' => [
+                'type' => Type::listOf(GraphQL::type('ProductVariations')),
+                'description' => 'The product of product',
+            ],
+            'productVariationsCat' => [
+                'type' => Type::listOf(GraphQL::type('VariationCat')),
+                'description' => 'The product of product',
+            ],
 
         ];
     }

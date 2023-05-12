@@ -2,6 +2,7 @@
 
 namespace App\GraphQL\Types\Stock;
 
+use App\Models\ProductVariations;
 use GraphQL\Type\Definition\Type as DefinitionType;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Type;
@@ -10,8 +11,9 @@ class ProductVariationType extends Type
 {
 
     protected $attributes = [
-        'name' => 'ProductVariation',
+        'name' => 'ProductVariations',
         'description' => 'A type for product variation',
+        'model' => ProductVariations::class,
     ];
 
     public function fields(): array

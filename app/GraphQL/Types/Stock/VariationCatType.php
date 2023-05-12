@@ -27,8 +27,12 @@ class VariationCatType extends Type
                 'description' => 'The itens of variation category',
             ],
             'productVariations' => [
-                'type' => DefinitionType::listOf(GraphQL::type('ProductVariation')),
+                'type' => DefinitionType::listOf(GraphQL::type('ProductVariations')),
                 'description' => 'The variation of variation category',
+            ],
+            'product' => [
+                'type' => DefinitionType::listOf(GraphQL::type('Product')),
+                'description' => 'The product of variation category',
             ],
         ];
     }

@@ -9,7 +9,9 @@ use App\Models\ProductCategoryItens;
 use App\Models\ProductVariationCat;
 use App\Models\ProductVariations;
 use App\Models\ProductWithCategory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use LengthException;
 
 class StockServices
 {
@@ -94,30 +96,17 @@ class StockServices
         }
         ProductCategoryItens::insert($itensProduct);
 
-        foreach ($itensProduct as $item) {
-            ProductVariations::create([
-                'id' => Str::uuid()->toString(),
-                'qtd_stock' => $item['qtd_stock'] ?? $infoProduct->qtd,
-                'price' => $item['price'] ?? $infoProduct->price,
-                'product_id' => $categoryProduct->product_id,
-                'variations_products_category_items_id' => $item['id'],
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]);
-        }
+        $teste = $this->generateVariations($categoryProduct->product_id);
 
-        // $this->generateVariations($categoryProduct->product_id);
-
-        return $itensProduct;
+        return $teste;
     }
 
     public function generateVariations($variation)
     {
-        $product = ProductWithCategory::where('product_id', $variation['product_id'])->get();
-        $findIdVariation = ProductVariations::where('product_id', $variation['product_id'])->get();
-        $index = 0;
+        $id = $variation['product_id'];
+        $categoryProduct = ProductWithCategory::where('product_id', $variation['product_id'])->get();
         $variationCat = [];
-        $itensVariation = $product->each(function ($itens) {
+        $itensVariation = $categoryProduct->each(function ($itens) {
             $itens->itensCategory;
         });
         $variations = [[]];
@@ -131,22 +120,38 @@ class StockServices
             $variations = $newVariation;
         }
 
-        $finds = [];
-        foreach ($variations as $var) {
-            foreach ($findIdVariation as $find) {
-                if ($find->variations_products_category_items_id === $var[1]) {
-                    $finds[] = $find->id;
-                }
-            }
-            $variationCat[] = [
-                'id' => Str::uuid()->toString(),
-                'variations_products_id' => $finds[$index],
-                'variations_products_category_items_id' => $variations[$index][0],
-            ];
-            $index++;
-        }
 
-        ProductVariationCat::insert($variationCat);
+        DB::transaction(function () use ($id, $variationCat, $variations) {
+            foreach ($variations as $var) {
+                ProductVariations::create([
+                    'id' => Str::uuid()->toString(),
+                    'qtd_stock' => $var['qtd_stock'] ?? 0,
+                    'price' => $var['price'] ?? 0,
+                    'product_id' => $id,
+                ]);
+            }
+            $variationCatOption = $this->createVariationCatOption($id, $variations);
+            DB::table('variationCatOption')->insert($variationCatOption);
+        }, 3);
         return $variationCat;
+    }
+
+    private function createVariationCatOption($variationCat, array $variation)
+    {
+        $index = 0;
+        $searchVariation = ProductVariations::where('product_id', $variationCat)->get();
+        $variationCatOption = [];
+
+        //montar todas as combinações
+        foreach ($variation as $var) {
+            foreach ($searchVariation as $search) {
+                $variationCatOption[] = [
+                    'id' => Str::uuid()->toString(),
+                    'variations_products_id' => $search->id,
+                    'variations_products_category_items_id' => $var[$index]
+                ];
+            }
+        }
+        return $variationCatOption;
     }
 }

@@ -22,13 +22,14 @@ class ProductCategoryItens extends Model
     {
         return $this->belongsTo(ProductWithCategory::class, 'variations_category_id');
     }
+
     public function productVariations()
     {
-        return $this->hasMany(ProductVariations::class);
+        return $this->belongsToMany(ProductVariations::class, 'variationCatOption', 'variations_products_category_items_id', 'variations_products_id');
     }
 
     public function productVariationCat()
     {
-        return $this->belongsToMany(ProductVariationCat::class, 'variationCatOption', 'variations_products_category_items_id');
+        return $this->belongsToMany(ProductVariations::class, 'variationCatOption', 'variations_products_category_items_id', 'variations_products_id');
     }
 }

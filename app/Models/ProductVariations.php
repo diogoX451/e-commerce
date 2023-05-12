@@ -23,14 +23,14 @@ class ProductVariations extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class);
+        return $this->belongsToMany(Product::class, 'variations_products', 'product_id');
     }
-    public function variationsItems()
+    public function itensCategory()
     {
-        return $this->belongsTo(ProductCategoryItens::class);
+        return $this->belongsToMany(ProductCategoryItens::class, 'variationCatOption', 'variations_products_id', 'variations_products_category_items_id');
     }
     public function productVariationsCat()
     {
-        return $this->belongsToMany(ProductVariationCat::class, 'variationCatOption', 'variations_products_id');
+        return $this->belongsToMany(ProductVariationCat::class, 'variationCatOption', 'variations_products_id', 'variations_products_category_items_id');
     }
 }
