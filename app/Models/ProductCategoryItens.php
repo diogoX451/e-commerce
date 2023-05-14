@@ -25,11 +25,8 @@ class ProductCategoryItens extends Model
 
     public function productVariations()
     {
-        return $this->belongsToMany(ProductVariations::class, 'variationCatOption', 'variations_products_category_items_id', 'variations_products_id');
+        return $this->belongsToMany(ProductVariations::class, 'variationCatOption', 'variations_products_category_items_id', 'variations_products_id')
+        ->using(PivotVariations::class);
     }
 
-    public function productVariationCat()
-    {
-        return $this->belongsToMany(ProductVariations::class, 'variationCatOption', 'variations_products_category_items_id', 'variations_products_id');
-    }
 }

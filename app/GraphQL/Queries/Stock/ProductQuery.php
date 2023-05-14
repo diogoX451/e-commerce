@@ -18,7 +18,7 @@ class ProductQuery extends Query
 
     public function type(): Type
     {
-        return GraphQL::type('Product');
+        return Type::listOf(GraphQL::type('Product'));
     }
 
     public function args(): array
@@ -34,18 +34,7 @@ class ProductQuery extends Query
     public function resolve($root, $args)
     {
 
-        $product = Product::where('id', $args['id'])->first();
-
-        $productVariations = ProductVariations::where('product_id', $args['id'])->get();
-
-        foreach ($productVariations as $key => $value) {
-            $productVariationsCat = ProductVariationCat::where('variations_products_id', $value->id)->get();
-            foreach ($productVariationsCat as $key2 => $value2) {
-                $itensCategory = $value2->itensCategory()->get();
-                $productVariations[$key]->productVariationsCat[$key2]->itensCategory = $itensCategory;
-            }
-            $product->productVariations = $productVariations;
-        }
+        $product = Product::find($args);
         return $product;
     }
 }

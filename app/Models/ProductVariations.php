@@ -23,14 +23,16 @@ class ProductVariations extends Model
 
     public function product()
     {
-        return $this->belongsToMany(Product::class, 'variations_products', 'product_id');
+        return $this->belongsTo(Product::class, 'product_id');
     }
     public function itensCategory()
     {
-        return $this->belongsToMany(ProductCategoryItens::class, 'variationCatOption', 'variations_products_id', 'variations_products_category_items_id');
+        return $this->belongsToMany(ProductCategoryItens::class, 'variationCatOption', 'variations_products_id', 'variations_products_category_items_id')
+            ->using(PivotVariations::class);
     }
-    public function productVariationsCat()
+   
+    public function variationCatOption()
     {
-        return $this->belongsToMany(ProductVariationCat::class, 'variationCatOption', 'variations_products_id', 'variations_products_category_items_id');
+        return $this->hasMany(ProductVariationCat::class);
     }
 }
