@@ -15,14 +15,4 @@ class ProductVariationCat extends Model
         'variations_products_id',
         'variations_products_category_items_id',
     ];
-
-    public function productVariations()
-    {
-        return $this->belongsTo(ProductVariations::class, 'variations_products_id');
-    }
-
-    public function itensCategory()
-    {
-        return $this->belongsToMany(ProductCategoryItens::class, 'variationCatOption', 'variations_products_category_items_id');
-    }
 }

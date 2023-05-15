@@ -83,7 +83,6 @@ class StockServices
     public function createItensCategoryProduct($itens)
     {
         $categoryProduct = ProductWithCategory::find($itens['category_product_id']);
-        $infoProduct = Product::find($categoryProduct->product_id);
         $itensProduct = [];
         $index = 0;
         foreach ($itens['name'] as $name) {
@@ -119,7 +118,7 @@ class StockServices
             }
             $variations = $newVariation;
         }
-        
+
 
         DB::transaction(function () use ($id, $variationCat, $variations) {
             foreach ($variations as $var) {
@@ -146,16 +145,16 @@ class StockServices
 
         //montar todas as combinações
 
-        foreach($variation as $var){
-           foreach($var as $v){
-               $variationCatOption[$index]['id'] = Str::uuid()->toString();
-               $variationCatOption[$index]['variations_products_id'] = $searchVariation[$indexExt]->id;
-               $variationCatOption[$index]['variations_products_category_items_id'] = $v;
-               $index++;
-           }
-           $indexExt++;
+        foreach ($variation as $var) {
+            foreach ($var as $v) {
+                $variationCatOption[$index]['id'] = Str::uuid()->toString();
+                $variationCatOption[$index]['variations_products_id'] = $searchVariation[$indexExt]->id;
+                $variationCatOption[$index]['variations_products_category_items_id'] = $v;
+                $index++;
+            }
+            $indexExt++;
         }
-       
+
         return $variationCatOption;
     }
 }
