@@ -11,7 +11,8 @@ use GraphQL\Type\Definition\Type;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Mutation;
 
-class CreateProductMutation extends Mutation{
+class CreateProductMutation extends Mutation
+{
 
 
     protected $attributes = [
@@ -39,22 +40,23 @@ class CreateProductMutation extends Mutation{
             'image' => [
                 'type' => Type::nonNull(Type::string()),
             ],
-            'qtd' =>[
+            'qtd' => [
                 'type' => Type::nonNull(Type::int()),
             ],
             'is_variation' => [
                 'type' => Type::nonNull(Type::boolean()),
             ],
-            'category'=> [
+            'category_id' => [
                 'type' => Type::nonNull(Type::string()),
             ],
             'variation' => [
                 'type' => Type::listOf(Type::string()),
-            ]
+            ],
         ];
     }
 
-    public function resolve($root, array $args, $context, ResolveInfo $resolveInfo, Closure $getSelectFields ){
+    public function resolve($root, array $args)
+    {
         return (new StockServices())->createProduct($args);
     }
 }

@@ -31,6 +31,10 @@ class CategoryProductType extends GraphQLType
                 'type' => Type::string(),
                 'description' => 'The description of category',
             ],
+            'message' => [
+                'type' => Type::string(),
+                'description' => 'The message of category',
+            ],
             'product' => [
                 'type' => GraphQL::type('Product'),
                 'description' => 'The products of product',

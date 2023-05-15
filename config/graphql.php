@@ -81,6 +81,7 @@ return [
                 \App\GraphQL\Queries\Address\EnderecosQuery::class,
                 \App\GraphQL\Queries\Address\EnderecoQuery::class,
                 \App\GraphQL\Queries\Stock\ProductQuery::class,
+                \App\GraphQL\Queries\Stock\ProductsQuery::class,
             ],
             'mutation' => [
                 \App\GraphQL\Mutations\Endereco\CreateEnderecoMutation::class,
@@ -100,7 +101,6 @@ return [
                 \App\GraphQL\Types\Stock\CategoryType::class,
                 \App\GraphQL\Types\Stock\CategoryProductType::class,
                 \App\GraphQL\Types\Stock\ItensCategoryType::class,
-                \App\GraphQL\Types\Stock\VariationCatType::class,
                 \App\GraphQL\Types\Stock\ProductVariationType::class,
             ],
             // Laravel HTTP middleware

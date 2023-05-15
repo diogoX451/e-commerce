@@ -31,10 +31,8 @@ class ProductQuery extends Query
         ];
     }
 
-    public function resolve($root, $args)
+    public function resolve($root, array $args)
     {
-
-        $product = Product::find($args);
-        return $product;
+        return Product::find($args);
     }
 }

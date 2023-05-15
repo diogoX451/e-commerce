@@ -32,13 +32,13 @@ class ItensCategoryType extends SupportType
                 'type' => Type::string(),
                 'description' => 'The description of category itens',
             ],
+            'message' => [
+                'type' => Type::string(),
+                'description' => 'The message of category itens',
+            ],
             'productWithCategory' => [
                 'type' => Type::listOf(GraphQL::type('CategoryProduct')),
                 'description' => 'The category of category itens',
-            ],
-            'productVariationCat' => [
-                'type' => Type::listOf(GraphQL::type('VariationCat')),
-                'description' => 'The variation of category itens'
             ],
             'productVariations' => [
                 'type' => Type::listOf(GraphQL::type('ProductVariations')),
