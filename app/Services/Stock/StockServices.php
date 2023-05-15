@@ -14,7 +14,6 @@ use Illuminate\Support\Str;
 
 class StockServices
 {
-
     private $uuid;
 
     public function __construct()
