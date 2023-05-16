@@ -4,6 +4,7 @@ namespace App\GraphQL\Queries\Stock;
 
 use App\Repository\StockRepositoryInterface;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\Redis;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
 

@@ -9,6 +9,7 @@ use App\Models\ProductCategoryItens;
 use App\Models\ProductVariations;
 use App\Models\ProductWithCategory;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redis;
 use Illuminate\Support\Str;
 
 
@@ -154,5 +155,25 @@ class StockServices
         }
 
         return $variationCatOption;
+    }
+
+    public function teste($id)
+    {
+        $id = $id['id'];
+        $products = Product::with('productVariations')->find($id);
+        $products->productVariations->each(function ($item) {
+            $item->itensCategory;
+        });
+
+
+        $redis = Redis::connection();
+        $redis->set('products' . $id, json_encode($products));
+
+        if ($redis->exists('products' . $id)) {
+            $product = $redis->get('products' . $id);
+            return json_decode($product);
+        }
+
+        return $products;
     }
 }

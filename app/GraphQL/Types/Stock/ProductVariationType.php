@@ -31,7 +31,7 @@ class ProductVariationType extends Type
                 'type' => DefinitionType::string(),
                 'description' => 'The description of product variation',
             ],
-            'itensCategory' => [
+            'itens_category' => [
                 'type' => DefinitionType::listOf(GraphQL::type('ItensCategory')),
                 'description' => 'The itens of product variation',
             ],
