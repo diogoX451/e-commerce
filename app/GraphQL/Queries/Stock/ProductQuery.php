@@ -48,5 +48,6 @@ class ProductQuery extends Query
 
         $redis->set('products' . $id, json_encode($products));
         $redis->expire('products' . $id, 60);
+        return json_decode($products);
     }
 }
