@@ -36,7 +36,6 @@ class StockServices
 
     public function createProduct(array $product)
     {
-
         $category =  Category::find($product['category_id']);
 
         if (!$category) {
@@ -54,6 +53,7 @@ class StockServices
                 'is_variation' => $product['is_variation'],
                 'category_id' => $category->id
             ]);
+            $this->generateVariations($products->id);
             return $products;
         }
 
