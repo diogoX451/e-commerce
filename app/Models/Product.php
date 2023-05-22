@@ -27,10 +27,10 @@ class Product extends Model
 
     public function category()
     {
-        return $this->belongsTo(Category::class);
+        return $this->hasMany(Category::class);
     }
 
-    public function productWithCategory()
+    public function product_with_variations()
     {
         return $this->hasMany(ProductWithCategory::class);
     }

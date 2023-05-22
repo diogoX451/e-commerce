@@ -26,33 +26,7 @@ class ProductsQuery extends Query
     {
         return Type::listOf(GraphQL::type('Product'));
     }
-
-    public function args(): array
-    {
-        return [
-            'id' => [
-                'type' => Type::string(),
-                'description' => 'The id of the product'
-            ],
-            'name' => [
-                'type' => Type::string(),
-                'description' => 'The name of the product'
-            ],
-            'description' => [
-                'type' => Type::string(),
-                'description' => 'The description of the product'
-            ],
-            'price' => [
-                'type' => Type::string(),
-                'description' => 'The price of the product'
-            ],
-            'image' => [
-                'type' => Type::string(),
-                'description' => 'The image of the product'
-            ],
-        ];
-    }
-
+    
     public function resolve()
     {
         return $this->stockRepository->all();
