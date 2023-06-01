@@ -6,6 +6,7 @@ use App\Models\Product;
 use App\Models\ProductVariationCat;
 use App\Models\ProductVariations;
 use GraphQL\Type\Definition\Type;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redis;
 use Rebing\GraphQL\Support\Facades\GraphQL;
 use Rebing\GraphQL\Support\Query;
@@ -40,11 +41,16 @@ class ProductQuery extends Query
             $product = $redis->get('products' . $id);
             return json_decode($product);
         }
-
+        DB::enableQueryLog();
+        
         $products = Product::with('productVariations')->find($id);
         $products->productVariations->each(function ($item) {
             $item->itensCategory;
         });
+        $queries = DB::getQueryLog();
+        //deixar em json
+
+        
 
         $redis->set('products' . $id, json_encode($products));
         $redis->expire('products' . $id, 60);
