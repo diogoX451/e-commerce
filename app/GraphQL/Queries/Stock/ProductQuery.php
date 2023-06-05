@@ -42,7 +42,8 @@ class ProductQuery extends Query
             return json_decode($product);
         }
         DB::enableQueryLog();
-        
+
+
         $products = Product::with('productVariations')->find($id);
         $products->productVariations->each(function ($item) {
             $item->itensCategory;
@@ -50,7 +51,7 @@ class ProductQuery extends Query
         $queries = DB::getQueryLog();
         //deixar em json
 
-        
+
 
         $redis->set('products' . $id, json_encode($products));
         $redis->expire('products' . $id, 60);
