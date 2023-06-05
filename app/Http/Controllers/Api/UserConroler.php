@@ -40,38 +40,7 @@ class UserConroler extends Controller
 
     public function register(Request $request)
     {
-        $subQuery = DB::table('product as p')
-            ->select(
-                'p.name',
-                'c.name as Categorias',
-                DB::raw("json_build_object(
-                'itens_category', json_agg(
-                    json_build_object(
-                        'name', vpci.name
-                    )
-                )
-            ) as itens_category")
-            )
-            ->join('category as c', 'p.category_id', '=', 'c.id')
-            ->join('variations_products as vp', 'p.id', '=', 'vp.product_id')
-            ->join('variationCatOption as vco', 'vp.id', '=', 'vco.variations_products_id')
-            ->join('variations_products_category_items as vpci', 'vco.variations_products_category_items_id', '=', 'vpci.id')
-            ->groupBy('p.name', 'c.name', 'vp.id');
-
-        $results = DB::table(DB::raw("({$subQuery->toSql()}) as subquery"))
-            ->mergeBindings($subQuery)
-            ->select(
-                'name',
-                'Categorias',
-                DB::raw("json_build_object('product_variations', json_agg(itens_category)) as product_variations")
-            )
-            ->groupBy('name', 'Categorias')
-            ->get();
-
-        $results->map(function ($item) {
-            $item->product_variations = json_decode($item->product_variations);
-        });
-        return $results;
+        return (new StockServices())->findProduct($request->id);
     }
 
     public function login(Request $request)
