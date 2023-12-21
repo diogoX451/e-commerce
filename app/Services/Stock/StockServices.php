@@ -22,52 +22,7 @@ class StockServices
         $this->uuid = Str::uuid()->toString();
     }
 
-    public function findProduct(string $id)
-    {
-        $redis = Redis::connection();
-        if ($redis->exists('products' . $id)) {
-            $product = $redis->get('products' . $id);
-            return json_decode($product);
-        }
 
-        $subQuery = DB::table('product as p')
-            ->select(
-                'p.name',
-                'c.name as Categorias',
-                DB::raw("json_build_object(
-            'itens_category', json_agg(
-                json_build_object(
-                    'name', vpci.name
-                )
-            )
-        ) as itens_category")
-            )
-            ->join('category as c', 'p.category_id', '=', 'c.id')
-            ->join('variations_products as vp', 'p.id', '=', 'vp.product_id')
-            ->join('variationCatOption as vco', 'vp.id', '=', 'vco.variations_products_id')
-            ->join('variations_products_category_items as vpci', 'vco.variations_products_category_items_id', '=', 'vpci.id')
-            ->where('p.id', '=', $id)
-            ->groupBy('p.name', 'c.name', 'vp.id');
-
-        $results = DB::table(DB::raw("({$subQuery->toSql()}) as subquery"))
-            ->mergeBindings($subQuery)
-            ->select(
-                'name',
-                'Categorias',
-                DB::raw("json_build_object('product_variations', json_agg(itens_category)) as product_variations")
-            )
-            ->groupBy('name', 'Categorias')
-            ->get();
-
-        $results->map(function ($item) {
-            $item->product_variations = json_decode($item->product_variations);
-        });
-
-        $redis->set('products' . $id, json_encode($results));
-        $redis->expire('products' . $id, 60);
-
-        return $results;
-    }
 
     public function createCategory(array $category)
     {
@@ -124,6 +79,26 @@ class StockServices
         }
 
         return ['message' => 'Produto cadastrado com sucesso'];
+    }
+
+    public function findProduct(string $id)
+    {
+        $redis = Redis::connection();
+        if ($redis->exists('products' . $id)) {
+            $product = $redis->get('products' . $id);
+            return json_decode($product);
+        }
+
+        $results = (new Product())->getRelationProduct($id);
+
+        return $results->map(function ($item) {
+            $item->product_variations = json_decode($item->product_variations);
+        });
+
+        $redis->set('products' . $id, json_encode($results));
+        $redis->expire('products' . $id, 60);
+
+        return $results;
     }
 
     public function createItensCategoryProduct(array $itens)
@@ -184,7 +159,7 @@ class StockServices
         return;
     }
 
-    private function createRelationProductVariation($id, array $variation)
+    private function createRelationProductVariation($id, array $variation)  
     {
         $index = 0;
         $indexExt = 0;
